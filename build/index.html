@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Earth Store</title>
+    <link rel="icon" type="image/png" href="/build/earth icon.png" />
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <style>
+      .container {
+        transition: all 0.3s linear;
+      }
+
+      .hover-icon {
+        opacity: 0;
+        transition: all 0.3s;
+      }
+
+      .container:hover .hover-icon {
+        opacity: 1;
+        visibility: visible;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen font-roboto">
+    <!-- Loading screen -->
+    <div
+      class="fixed bg-white bg-opacity-90 w-full h-full flex flex-col justify-center items-center z-40"
+      id="loading-screen"
+    >
+      <div
+        class="font-jost flex flex-col items-center text-greendark text-4xl font-semibold tracking-widest uppercase mb-3"
+      >
+        Earth Store
+      </div>
+      <div
+        class="w-1/4 h-5 border-2 border-greenlight bg-greendark rounded-full overflow-hidden"
+      >
+        <div
+          class="progress h-full w-0 bg-greenlight transition-width duration-300"
+        ></div>
+      </div>
+    </div>
+    <div class="relative">
+      <img
+        class="absolute w-full h-420 object-cover object-right lg:h-fit"
+        src="./images/Banner.jpg"
+        alt="banner"
+      />
+      <header class="bg-transparent font-roboto p-6 md:py-10 md:px-12">
+        <nav class="flex justify-between relative items-center tracking-widest">
+          <div
+            class="uppercase font-jost font-bold text-xl tracking-widest md:text-2xl"
+          >
+            <a href="index.html">earth store</a>
+          </div>
+          <div class="hidden font-jost items-center gap-10 lg:flex">
+            <ul class="uppercase flex gap-7 md:text-lg">
+              <li class="relative">
+                <a
+                  class="transition-all duration-200 hover:text-greendark after:content-[''] after:absolute after:left-0 after:bottom-0 after:bg-greendark after:h-1 after:w-0 after:transition-all after:duration-200 hover:after:w-full"
+                  href="index.html"
+                  >Home</a
+                >
+              </li>
+              <li class="relative">
+                <a
+                  class="transition-all duration-200 hover:text-greendark after:content-[''] after:absolute after:left-0 after:bottom-0 after:bg-greendark after:h-1 after:w-0 after:transition-all after:duration-200 hover:after:w-full"
+                  href="about.html"
+                  >About</a
+                >
+              </li>
+              <li class="relative">
+                <a
+                  class="transition-all duration-200 hover:text-greendark after:content-[''] after:absolute after:left-0 after:bottom-0 after:bg-greendark after:h-1 after:w-0 after:transition-all after:duration-200 hover:after:w-full"
+                  href="shop.html"
+                  >shop</a
+                >
+              </li>
+              <li class="relative">
+                <a
+                  class="transition-all duration-200 hover:text-greendark after:content-[''] after:absolute after:left-0 after:bottom-0 after:bg-greendark after:h-1 after:w-0 after:transition-all after:duration-200 hover:after:w-full"
+                  href="contact.html"
+                  >contact</a
+                >
+              </li>
+            </ul>
+            <div class="flex gap-6">
+              <button
+                id="sidebar-btn"
+                class="transition-all duration-200 hover:text-greendark md:text-2xl"
+              >
+                <i class="fa-solid fa-bag-shopping"></i>
+              </button>
+              <button
+                class="transition-all duration-200 hover:text-greendark md:text-2xl"
+              >
+                <i class="fa-solid fa-user-large"></i>
+              </button>
+            </div>
+          </div>
+          <!-- hamburger btn -->
+          <div class="lg:hidden flex gap-4">
+            <button id="mobile-sidebar">
+              <i class="fa-solid fa-bag-shopping text-2xl"></i>
+            </button>
+            <button
+              id="hamburger-btn"
+              class="text-3xl cursor-pointer relative w-8 h-8"
+            >
+              <!-- &#9776; -->
+              <div
+                class="bg-black w-8 h-1 rounded absolute top-4 -mt-0.5 transition-all duration-500 before:content-[''] before:bg-black before:w-8 before:h-1 before:rounded before:absolute before:transition-all before:duration-500 before:-translate-x-4 before:-translate-y-3 after:content-[''] after:bg-black after:w-8 after:h-1 after:rounded after:absolute after:transition-all after:duration-500 after:-translate-x-4 after:translate-y-3"
+              ></div>
+            </button>
+          </div>
+        </nav>
+        <!-- sidebar -->
+        <aside
+          id="sidebar"
+          class="fixed hidden p-4 bg-white h-full top-0 right-0 flex-col justify-between transition-all duration-200 animate-open-sidebar min-w-80 md:min-w-96 z-50"
+        >
+          <div
+            class="text-greendark flex justify-between items-center capitalize after:absolute after:content-[''] after:w-full after:h-0.5 after:bg-black after:bg-opacity-60 after:top-16 after:left-0"
+          >
+            <h1 class="font-bold text-xl">shopping cart</h1>
+            <button id="close-sb" class="text-4xl">&times;</button>
+          </div>
+          <!-- items will add dynamically here -->
+          <button
+            class="w-full bg-greenlight text-white py-2 uppercase transition-all duration-300 hover:bg-greendark"
+          >
+            continue shopping
+          </button>
+        </aside>
+        <!--mobile menu -->
+        <nav
+          id="mobile-menu"
+          class="absolute bg-white animate-open-menu w-full hidden top-20 left-0 p-6 md:px-12 z-50"
+        >
+          <ul class="uppercase flex flex-col gap-2 md:gap-5">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="shop.html">shop</a></li>
+            <li><a href="contact.html">contact</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <!-- hero section -->
+      <section
+        class="flex relative top-12 font-roboto flex-col justify-center items-center uppercase lg:top-36"
+      >
+        <h1
+          class="font-jost text-greendark font-medium text-5xl tracking-widest mb-2 md:text-6xl lg:text-7xl"
+        >
+          earth
+        </h1>
+        <p class="text-xl font-jost font-light tracking-widest md:text-4xl">
+          multipurpose store
+        </p>
+
+        <button
+          class="mt-10 bg-greenlight text-white tracking-widest px-7 py-3 uppercase transition-all duration-200 hover:bg-greendark"
+        >
+          <a href="shop.html">shop now</a>
+        </button>
+      </section>
+    </div>
+
+    <main class="pt-56 md:pt-400px lg:pt-500px">
+      <!-- product section -->
+      <section
+        class="flex mb-32 flex-col gap-12 px-4 md:px-20 md:flex-row md:gap-6"
+      >
+        <a href="posterv1.html">
+          <div class="relative container">
+            <div
+              class="absolute invisible hover-icon top-2 right-2 px-2 py-1 bg-white rounded-full"
+            >
+              <i class="fa-solid fa-bag-shopping text-greenlight"></i>
+            </div>
+            <img class="mb-4" src="./images/Poster v1.jpg" alt="poster1" />
+            <label class="opacity-60 text-sm md:text-base">Posters</label>
+            <h5 class="font-semibold font-jost mb-2 mt-2 md:text-lg">
+              Poster V1
+            </h5>
+            <p class="text-sm font-semibold md:text-base">$23.99</p>
+          </div>
+        </a>
+
+        <a href="posterv2.html">
+          <div class="relative container">
+            <div
+              class="absolute invisible hover-icon top-2 right-2 px-2 py-1 bg-white rounded-full transition-all duration-200"
+            >
+              <i class="fa-solid fa-bag-shopping text-greenlight"></i>
+            </div>
+            <img class="mb-4" src="./images/Poster v2.jpg" alt="poster1" />
+            <label class="opacity-60 text-sm md:text-base">Posters</label>
+            <h5 class="font-semibold font-jost mb-2 mt-2 md:text-lg">
+              Poster V2
+            </h5>
+            <p class="text-sm font-semibold md:text-base">$17.99</p>
+          </div>
+        </a>
+
+        <a href="posterv3.html">
+          <div class="relative container">
+            <div
+              class="absolute invisible hover-icon top-2 right-2 px-2 py-1 bg-white rounded-full transition-all duration-200"
+            >
+              <i class="fa-solid fa-bag-shopping text-greenlight"></i>
+            </div>
+            <img class="mb-4" src="./images/Poster v3.jpg" alt="poster1" />
+            <label class="opacity-60 text-sm md:text-base">Posters</label>
+            <h5 class="font-semibold font-jost mb-2 mt-2 md:text-lg">
+              Poster V3
+            </h5>
+            <p class="text-sm font-semibold md:text-base">$14.99</p>
+          </div>
+        </a>
+      </section>
+
+      <!-- testimonial section -->
+      <section class="font-roboto px-4 md:px-20 mb-24">
+        <div class="mb-10">
+          <h1
+            class="font-medium font-jost w-60 text-2xl capitalize md:w-full md:text-4xl"
+          >
+            What our customers say
+          </h1>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="h-full flex flex-col justify-between items-start">
+            <i class="fa-solid fa-quote-left text-greendark text-3xl mb-4"></i>
+            <p class="mb-4 text-slate-600">
+              Fast shipping and excellent customer service. The product was even
+              better than expected. I will definitely be a returning customer.
+            </p>
+            <img
+              class="mb-4 rounded-full mt-auto"
+              src="./images/earth-store-testimonial-avatar-img.jpeg"
+              alt="avatar"
+            />
+            <p class="tracking-widest text-xs font-semibold">JENNIFER LEWIS</p>
+          </div>
+
+          <div class="h-full flex flex-col justify-between items-start">
+            <i class="fa-solid fa-quote-left text-greendark text-3xl mb-4"></i>
+            <p class="mb-4 text-slate-600">
+              Great user experience on your website. I found exactly what I was
+              looking for at a great price. I will definitely be telling my
+              friends.
+            </p>
+            <img
+              class="mb-4 mt-auto rounded-full"
+              src="./images/earth-store-testimonials-avatar-img-2.jpeg"
+              alt="avatar"
+            />
+            <p class="tracking-widest text-xs font-semibold">ALICIA HEART</p>
+          </div>
+
+          <div class="h-full flex flex-col justify-between items-start">
+            <i class="fa-solid fa-quote-left text-greendark text-3xl mb-4"></i>
+            <p class="mb-4 text-slate-600">
+              Thank you for the excellent shopping experience. It arrived
+              quickly and was exactly as described. I will definitely be
+              shopping with you again in the future.
+            </p>
+            <img
+              class="mb-4 mt-auto rounded-full"
+              src="./images/earth-store-testimonials-avatar-img-1.jpeg"
+              alt="avatar"
+            />
+            <p class="tracking-widest text-xs font-semibold">JUAN CARLOS</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- gift of postcard -->
+      <section class="relative mb-12">
+        <img
+          class="w-full h-96 object-cover object-center md:h-500"
+          src="./images/Call-to-action.jpg"
+          alt=""
+        />
+        <div
+          class="w-full absolute text-center top-20 left-1/2 -translate-x-1/2 md:top-1/4"
+        >
+          <h1
+            class="mb-8 text-4xl font-jost font-semibold tracking-widest md:text-5xl"
+          >
+            Give the Gift of a Postcard
+          </h1>
+          <p class="mb-8">Give the gift of a lasting memory with a postcard</p>
+          <button
+            class="uppercase px-5 py-2 bg-greenlight text-white tracking-widest text-sm md:text-base transition-all duration-200 hover:bg-greendark"
+          >
+            <a href="./postcards.html">purchase a postcard</a>
+          </button>
+        </div>
+      </section>
+
+      <section class="mb-14 px-6 lg:px-0">
+        <div class="grid grid-cols-1 md:grid-cols-3 md:gap-4">
+          <div
+            class="w-full h-full py-10 border-b border-gray-400 flex flex-col justify-center items-center text-center md:flex-row md:gap-6 md:text-start md:border-b-0 lg:border-r md:items-start md:py-0"
+          >
+            <div
+              class="mb-3 bg-greendark text-white rounded-full px-4 py-3 text-sm md:mb-0"
+            >
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <div>
+              <h2
+                class="font-jost tracking-widest uppercase font-medium text-sm mb-3 md:text-base md:mb-2"
+              >
+                secure payment
+              </h2>
+              <p class="text-sm text-gray-600">
+                All our payments are SSL secured
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="w-full h-full py-10 border-b border-gray-400 flex flex-col justify-center items-center text-center md:flex-row md:gap-6 md:text-start md:border-b-0 lg:border-r md:items-start md:py-0"
+          >
+            <div
+              class="mb-3 bg-greendark text-white rounded-full px-4 py-3 text-sm md:mb-0"
+            >
+              <i class="fa-solid fa-box"></i>
+            </div>
+            <div>
+              <h2
+                class="font-jost tracking-widest uppercase font-medium text-sm mb-3 md:text-base md:mb-2"
+              >
+                delivered with care
+              </h2>
+              <p class="text-sm text-gray-600">
+                Super fast shipping to your door
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="w-full h-full py-10 border-b border-gray-400 flex flex-col justify-center items-center text-center md:flex-row md:gap-6 md:text-start md:border-b-0 md:items-start md:py-0"
+          >
+            <div
+              class="mb-3 bg-greendark text-white rounded-full px-4 py-3 text-sm md:mb-0"
+            >
+              <i class="fa-solid fa-hand-holding-heart"></i>
+            </div>
+            <div>
+              <h2
+                class="font-jost tracking-widest uppercase font-medium text-sm mb-3 md:text-base md:mb-2"
+              >
+                excellent service
+              </h2>
+              <p class="text-sm text-gray-600">Live chat and phone support</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="pt-4 px-8 pb-14 flex flex-col items-center lg:flex-row lg:justify-between lg:px-20"
+    >
+      <div class="mb-10 lg:mb-0">
+        <ul
+          class="flex flex-col gap-3 text-sm items-center md:flex-row md:text-base md:gap-10 lg:gap-4"
+        >
+          <li>
+            <a
+              class="duration-200 transition-all hover:text-greendark"
+              href="index.html"
+              >Home</a
+            >
+          </li>
+          <li>
+            <a
+              class="duration-200 transition-all hover:text-greendark"
+              href="about.html"
+              >About</a
+            >
+          </li>
+          <li>
+            <a
+              class="duration-200 transition-all hover:text-greendark"
+              href="shop.html"
+              >Shop</a
+            >
+          </li>
+          <li>
+            <a
+              class="duration-200 transition-all hover:text-greendark"
+              href="contact.html"
+              >Contact</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div
+        class="mb-10 font-jost tracking-widest font-semibold uppercase text-2xl lg:mb-0"
+      >
+        <a href="index.html">earth store</a>
+      </div>
+
+      <div>
+        <p class="tracking-widest">Copyright &copy; 2024 Planet Earth Store</p>
+      </div>
+    </footer>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>
